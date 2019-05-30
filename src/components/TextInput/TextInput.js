@@ -169,7 +169,7 @@ class TextInput extends React.Component<TextInputProps, State> {
     error: new Animated.Value(this.props.error ? 1 : 0),
     focused: false,
     placeholder: this.props.error ? this.props.placeholder : '',
-    value: this.props.value || this.props.defaultValue,
+    value: this.props.value,
     labelLayout: {
       measured: false,
       width: 0,
@@ -193,7 +193,12 @@ class TextInput extends React.Component<TextInputProps, State> {
     ) {
       // The label should be minimized if the text input is focused, or has text
       // In minimized mode, the label moves up and becomes small
-      if (this.state.value || this.state.focused || this.props.error) {
+      if (
+        this.state.value ||
+        this.state.focused ||
+        this.props.error ||
+        this.props.defaultValue
+      ) {
         this._minmizeLabel();
       } else {
         this._restoreLabel();
